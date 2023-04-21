@@ -1,11 +1,11 @@
 import * as crypto from 'crypto';
 
-const STRING_ENCRYPTION_SECRET_KEY = process.env.STRING_ENCRYPTION_SECRET_KEY || '';
+export const STRING_ENCRYPTION_SECRET_KEY = process.env.STRING_ENCRYPTION_SECRET_KEY || '';
 
 const config = {
-  secretKey: STRING_ENCRYPTION_SECRET_KEY,
+  secretKey: STRING_ENCRYPTION_SECRET_KEY.split('-').join(''),
   algorithm: 'aes-256-cbc',
-  splitCode: '|',
+  splitCode: '.',
 };
 
 type Encrypt = {
@@ -19,15 +19,16 @@ type Decrypt = {
   key?: string;
 };
 
-export class CryptographicV1 {
+export class CryptographicV2 {
   private key = Buffer.from(config.secretKey);
+  private randomBytes = 16;
 
   private getBufferHex(value: string) {
     return Buffer.from(value, 'hex');
   }
 
-  encrypt({ value, randomBytes = 16, key }: Encrypt) {
-    const iv = Buffer.from(crypto.randomBytes(randomBytes));
+  encrypt({ value, key }: Encrypt) {
+    const iv = Buffer.from(crypto.randomBytes(this.randomBytes));
     const cipher = crypto.createCipheriv(config.algorithm, key || this.key, iv);
     const encrypted = cipher.update(value.trim());
 
