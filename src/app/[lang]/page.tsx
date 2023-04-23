@@ -1,17 +1,39 @@
+import { Metadata } from 'next';
+
 import { getDictionary } from '@/dictionaries';
+import { getUrlLocales } from '@/lib/getUrl';
+import { Locale } from '@/config/i18n.config';
+import { EncryptionComponent } from './components/EncryptionComponent';
 
 type GenerateMetadata = {
-  params: { lang: any };
+  params: { lang: Locale };
 };
 
-export async function generateMetadata({ params }: GenerateMetadata) {
-  const dict = await getDictionary(params.lang);
+type Props = GenerateMetadata;
+
+export async function generateMetadata({ params }: GenerateMetadata): Promise<Metadata> {
+  const translation = getDictionary(params.lang);
+
   return {
-    title: dict.title,
-    description: dict.description,
+    title: translation('title'),
+    alternates: {
+      canonical: params.lang,
+      languages: getUrlLocales(),
+    },
+    openGraph: {
+      title: translation('title'),
+      description: translation('description'),
+      url: params.lang,
+    },
   };
 }
 
-export default async function Home({ params }: any) {
-  return <div>{JSON.stringify(params, null, 2)}</div>;
+export default async function Home({ params }: Props) {
+  return (
+    <div className="w-full max-w-7xl mx-auto py-12 px-4">
+      <main>
+        <EncryptionComponent lang={params.lang} />
+      </main>
+    </div>
+  );
 }
