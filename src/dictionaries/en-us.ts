@@ -1,0 +1,26 @@
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  title: 'String encryption',
+  description: 'The open source string encryption service, written with NodeJS, Next.js and Vercel technology',
+  'Random Bytes': 'Random Bytes',
+  Password: 'Password',
+  'Text to encryption': 'Text to encryption',
+  'Minimum 16': 'Minimum 16',
+  'Maximum 32': 'Maximum 32',
+  'Encryption text is required': 'Encryption text is required',
+  Encrypt: 'Encrypt',
+  'Random bytes must be greater than or equal to 16 and less than or equal to 32!':
+    'Random bytes must be greater than or equal to 16 and less than or equal to 32!',
+  'Your encrypted key': 'Your encrypted key',
+  Optional: 'Optional',
+  'Maximum 32 characters!': 'Maximum 32 characters!',
+  'Maximum 10000 characters!': 'Maximum 10000 characters!',
+  Copy: 'Copy',
+  'Generate new?': 'Generate new?',
+  'Encrypted text is required': 'Encrypted text is required!',
+  Decrypt: 'Decrypt',
+  New: 'New',
+  'Encrypted text': 'Encrypted text',
+  'Decryption failed!': 'Decryption failed!',
+  'Check the entered password or encrypted text!': 'Check the entered password or encrypted text!',
+};
