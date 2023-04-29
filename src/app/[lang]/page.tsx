@@ -30,10 +30,8 @@ export async function generateMetadata({ params }: GenerateMetadata): Promise<Me
 
 export default async function Home({ params }: Props) {
   return (
-    <div className="w-full max-w-7xl mx-auto py-12 px-4">
-      <main>
-        <EncryptionComponent lang={params.lang} />
-      </main>
-    </div>
+    <main className="w-full items-center max-w-7xl mx-auto py-12 px-4">
+      <EncryptionComponent lang={params.lang} />
+    </main>
   );
 }

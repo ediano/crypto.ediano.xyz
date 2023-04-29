@@ -26,27 +26,13 @@ export function EncryptionComponent({ lang }: Props) {
   };
 
   return (
-    <div
-      className={classnames(
-        'w-full max-w-7xl flex flex-col gap-8 px-8 py-12 rounded shadow-lg min-h-full',
-        selectedEncryption === 'encrypt' && 'bg-gray-900',
-        selectedEncryption === 'decrypt' && 'bg-zinc-900',
-      )}
-    >
-      <div className="flex justify-center gap-4">
-        <ButtonUseClient
-          type="button"
-          onClick={() => handleSelectedEncryptionClick('encrypt')}
-          className={classnames(selectedEncryption === 'encrypt' && 'border-b-0', 'flex-1 bg-gray-900')}
-        >
+    <div className={classnames('w-full max-w-7xl flex flex-col gap-8 px-8 py-12 rounded shadow-lg min-h-full')}>
+      <div className="flex justify-center gap-4 w-full max-w-lg mx-auto">
+        <ButtonUseClient type="button" onClick={() => handleSelectedEncryptionClick('encrypt')} color="success">
           {translation('Encrypt')}
         </ButtonUseClient>
 
-        <ButtonUseClient
-          type="button"
-          onClick={() => handleSelectedEncryptionClick('decrypt')}
-          className={classnames(selectedEncryption === 'decrypt' && 'border-b-0', 'flex-1 bg-zinc-900')}
-        >
+        <ButtonUseClient type="button" onClick={() => handleSelectedEncryptionClick('decrypt')} color="info">
           {translation('Decrypt')}
         </ButtonUseClient>
       </div>
