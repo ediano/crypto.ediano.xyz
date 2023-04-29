@@ -26,7 +26,7 @@ export function EncryptionComponent({ lang }: Props) {
   };
 
   return (
-    <div className={classnames('w-full max-w-7xl flex flex-col gap-8 px-8 py-12 rounded shadow-lg min-h-full')}>
+    <div className={classnames('w-full max-w-7xl flex flex-col gap-8 px-8 py-12 rounded')}>
       <div className="flex justify-center gap-4 w-full max-w-lg mx-auto">
         <ButtonUseClient type="button" onClick={() => handleSelectedEncryptionClick('encrypt')} color="success">
           {translation('Encrypt')}
