@@ -23,7 +23,7 @@ export default {
   'Encrypted text': 'Texto criptografado',
   'Decryption failed!': 'Descriptografia falhou!',
   'Check the entered password or encrypted text!': 'Verifique a senha digitada ou o texto criptografado!',
-  Version: 'Version',
+  Version: 'Versão',
   Default: 'Padrão',
   'Your key!': 'Sua chave!',
 };
