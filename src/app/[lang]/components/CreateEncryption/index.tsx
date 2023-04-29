@@ -103,7 +103,7 @@ export function CreateEncryption({ lang }: Props) {
             {...register('textToEncryption', { required: true })}
           />
 
-          <ButtonUseClient type="submit" className="min-w-full mx-auto">
+          <ButtonUseClient type="submit" color="success">
             {translation('Encrypt')}
           </ButtonUseClient>
         </form>

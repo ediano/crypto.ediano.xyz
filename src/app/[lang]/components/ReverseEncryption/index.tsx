@@ -102,7 +102,7 @@ export function ReverseEncryption({ lang }: Props) {
             {...register('encryptedText', { required: true })}
           />
 
-          <ButtonUseClient type="submit" className="min-w-full mx-auto">
+          <ButtonUseClient type="submit" color="info">
             {translation('Decrypt')}
           </ButtonUseClient>
         </form>
