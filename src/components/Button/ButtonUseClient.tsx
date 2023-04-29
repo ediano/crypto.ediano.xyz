@@ -32,7 +32,7 @@ export function ButtonUseClient({
         isHover && !isOutline && color === 'success' && 'bg-green-600 hover:bg-green-800',
         isHover && !isOutline && color === 'alert' && 'bg-yellow-600 hover:bg-yellow-800',
         isHover && !isOutline && color === 'info' && 'bg-blue-600 hover:bg-blue-800',
-        isHover && !isOutline && color === 'white' && 'bg-white hover:bg-gray-800',
+        isHover && !isOutline && color === 'white' && 'bg-white hover:bg-gray-200 text-black hover:text-black',
 
         !isHover && !isOutline && color === 'default' && 'bg-slate-600',
         !isHover && !isOutline && color === 'close' && 'bg-red-600',

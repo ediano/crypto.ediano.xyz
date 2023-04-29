@@ -6,6 +6,7 @@ import { GithubIco, CaretDownIco } from './Icons';
 import { flag } from './locales';
 import { LocationOptions } from './LocationOptions';
 import { socialLinks } from './socialLinks';
+import { ListPages } from './ListPages';
 
 type Props = { lang: Locale };
 
@@ -35,6 +36,8 @@ export async function Navbar({ lang }: Props) {
               </li>
             );
           })}
+
+          <ListPages lang={lang} />
 
           <li className="relative flex flex-col">
             <button

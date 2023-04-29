@@ -18,10 +18,6 @@ type Props = {
 };
 
 const reverseEncryptionFormSchema = z.object({
-  password: z
-    .string()
-    .refine((value) => value.length <= 32, { message: 'Maximum 32 characters!' })
-    .optional(),
   encryptedText: z.string().nonempty('Encrypted text is required!'),
 });
 
@@ -63,11 +59,10 @@ export function ReverseEncryption({ lang }: Props) {
     setError({} as ResponseFetch);
 
     const newData = {
-      password: data.password,
       encryptedText: data.encryptedText,
     };
 
-    const response = await fetch('/api/v2/reverse-encryption', {
+    const response = await fetch('/api/v1/reverse-encryption', {
       method: 'POST',
       body: JSON.stringify(newData),
     });
@@ -86,15 +81,6 @@ export function ReverseEncryption({ lang }: Props) {
     <div className="w-full flex flex-col gap-12">
       {!encryptedKey && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-lg mx-auto">
-          <Input
-            lang={lang}
-            type="password"
-            maxLength={100}
-            label={`${translation('Password')}: (${translation('Optional')}, Max 32)`}
-            error={translation(errors.password?.message as any)}
-            {...register('password', { maxLength: 100 })}
-          />
-
           <Textarea
             lang={lang}
             label={translation('Encrypted text')}

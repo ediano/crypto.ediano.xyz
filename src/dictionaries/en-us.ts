@@ -23,4 +23,7 @@ export default {
   'Encrypted text': 'Encrypted text',
   'Decryption failed!': 'Decryption failed!',
   'Check the entered password or encrypted text!': 'Check the entered password or encrypted text!',
+  Version: 'Version',
+  Default: 'Default',
+  'Your key!': 'Your key!',
 };

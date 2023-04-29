@@ -115,32 +115,24 @@ export function CreateEncryption({ lang }: Props) {
 
           {!!encryptedKey && (
             <div className="w-full flex flex-col gap-4">
-              <div>{translation('Your encrypted key')}:</div>
+              <div>{translation('Your key!')}:</div>
 
-              <div className="w-full bg-green-300 text-black rounded p-4 flex flex-col gap-4">
+              <div className="w-full bg-green-600 text-white rounded p-4 flex flex-col gap-4">
                 <div className="w-full font-bold border-b border-white border-opacity-50 pb-4">{encryptedKey}</div>
 
                 <div className="flex gap-4 justify-around h-12">
-                  <button
+                  <ButtonUseClient
                     type="button"
                     onClick={() => handleCopyTextClick(encryptedKey)}
-                    className={classnames(
-                      'h-full flex items-center gap-2 bg-zinc-600 hover:bg-zinc-800 rounded py-2 px-6 text-white',
-                      copiedText && 'text-green-300',
-                    )}
+                    color="white"
+                    className={classnames(copiedText && 'text-green-600')}
                   >
                     {translation('Copy')} <Copy size={22} className={classnames(copiedText && 'animate-bounce')} />
-                  </button>
+                  </ButtonUseClient>
 
-                  <button
-                    type="button"
-                    onClick={handleNewEncryptedKeyClick}
-                    className={classnames(
-                      'h-full flex items-center gap-2 bg-white hover:bg-zinc-200 rounded py-2 px-6 text-black',
-                    )}
-                  >
+                  <ButtonUseClient type="button" onClick={handleNewEncryptedKeyClick} color="white">
                     {translation('New')}
-                  </button>
+                  </ButtonUseClient>
                 </div>
               </div>
             </div>

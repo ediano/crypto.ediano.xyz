@@ -17,28 +17,25 @@ type Props = {
   lang: Locale;
 };
 
-const reverseEncryptionFormSchema = z.object({
-  password: z
+const createEncryptionFormSchema = z.object({
+  textToEncryption: z
     .string()
-    .refine((value) => value.length <= 32, { message: 'Maximum 32 characters!' })
-    .optional(),
-  encryptedText: z.string().nonempty('Encrypted text is required!'),
+    .nonempty('Encryption text is required!')
+    .refine((value) => value.length <= 10000, { message: 'Maximum 10000 characters!' }),
 });
 
-type ReverseEncryptionFormData = z.infer<typeof reverseEncryptionFormSchema>;
+type CreateEncryptionFormData = z.infer<typeof createEncryptionFormSchema>;
 
-type ResponseFetch = { message: string; description?: string };
-
-export function ReverseEncryption({ lang }: Props) {
+export function CreateEncryption({ lang }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ReverseEncryptionFormData>({ resolver: zodResolver(reverseEncryptionFormSchema) });
+  } = useForm<CreateEncryptionFormData>({ resolver: zodResolver(createEncryptionFormSchema) });
 
   const translation = getDictionary(lang);
-  const [error, setError] = useState<ResponseFetch>({} as ResponseFetch);
+  const [error, setError] = useState('');
   const [encryptedKey, setEncryptedKey] = useState('');
   const [copiedText, setCopiedText] = useState(false);
 
@@ -55,27 +52,26 @@ export function ReverseEncryption({ lang }: Props) {
   const handleNewEncryptedKeyClick = () => {
     reset();
     setCopiedText(false);
-    setError({} as ResponseFetch);
+    setError('');
     setEncryptedKey('');
   };
 
-  const onSubmit: SubmitHandler<ReverseEncryptionFormData> = async (data) => {
-    setError({} as ResponseFetch);
+  const onSubmit: SubmitHandler<CreateEncryptionFormData> = async (data) => {
+    setError('');
 
     const newData = {
-      password: data.password,
-      encryptedText: data.encryptedText,
+      textToEncryption: data.textToEncryption,
     };
 
-    const response = await fetch('/api/v2/reverse-encryption', {
+    const response = await fetch('/api/v1/generate-encryption', {
       method: 'POST',
       body: JSON.stringify(newData),
     });
 
-    const metadata = (await response.json()) as ResponseFetch;
+    const metadata = (await response.json()) as { message: string };
 
     if (response.status !== 201) {
-      setError(metadata);
+      setError(metadata.message);
       return;
     }
 
@@ -86,43 +82,28 @@ export function ReverseEncryption({ lang }: Props) {
     <div className="w-full flex flex-col gap-12">
       {!encryptedKey && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-full max-w-lg mx-auto">
-          <Input
-            lang={lang}
-            type="password"
-            maxLength={100}
-            label={`${translation('Password')}: (${translation('Optional')}, Max 32)`}
-            error={translation(errors.password?.message as any)}
-            {...register('password', { maxLength: 100 })}
-          />
-
           <Textarea
             lang={lang}
-            label={translation('Encrypted text')}
-            error={translation(errors.encryptedText?.message as any)}
-            {...register('encryptedText', { required: true })}
+            label={`${translation('Text to encryption')}: (Max 10000)`}
+            error={translation(errors.textToEncryption?.message as any)}
+            {...register('textToEncryption', { required: true })}
           />
 
-          <ButtonUseClient type="submit" color="info">
-            {translation('Decrypt')}
+          <ButtonUseClient type="submit" color="success">
+            {translation('Encrypt')}
           </ButtonUseClient>
         </form>
       )}
 
-      {(!!error.message || !!encryptedKey) && (
+      {(!!error || !!encryptedKey) && (
         <div className="flex flex-col gap-8 w-full max-w-lg mx-auto break-words">
-          {!!error.message && (
-            <div className="w-full bg-red-300 text-black rounded p-4 flex flex-col gap-4">
-              <span>{translation(error.message as any)}</span>
-
-              {!!error.description && <span>{translation(error.description as any)}</span>}
-            </div>
-          )}
+          {!!error && <span className="w-full bg-red-300 text-black rounded p-4">{translation(error as any)}</span>}
 
           {!!encryptedKey && (
             <div className="w-full flex flex-col gap-4">
               <div>{translation('Your key!')}:</div>
 
-              <div className="w-full bg-blue-600 text-white rounded p-4 flex flex-col gap-4">
+              <div className="w-full bg-green-600 text-white rounded p-4 flex flex-col gap-4">
                 <div className="w-full font-bold border-b border-white border-opacity-50 pb-4">{encryptedKey}</div>
 
                 <div className="flex gap-4 justify-around h-12">
@@ -130,7 +111,7 @@ export function ReverseEncryption({ lang }: Props) {
                     type="button"
                     onClick={() => handleCopyTextClick(encryptedKey)}
                     color="white"
-                    className={classnames(copiedText && 'text-blue-600')}
+                    className={classnames(copiedText && 'text-green-600')}
                   >
                     {translation('Copy')} <Copy size={22} className={classnames(copiedText && 'animate-bounce')} />
                   </ButtonUseClient>
