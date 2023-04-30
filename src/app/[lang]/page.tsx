@@ -15,14 +15,14 @@ export async function generateMetadata({ params }: GenerateMetadata): Promise<Me
   const translation = getDictionary(params.lang);
 
   return {
-    title: translation('title'),
+    title: translation.title,
     alternates: {
       canonical: params.lang,
       languages: getUrlLocales(),
     },
     openGraph: {
-      title: translation('title'),
-      description: translation('description'),
+      title: translation.title,
+      description: translation.description,
       url: params.lang,
     },
   };

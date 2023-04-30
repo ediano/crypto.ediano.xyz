@@ -22,7 +22,7 @@ export function ListPages({ lang }: Props) {
         id="menu-versions"
         className="peer/menu-versions h-[42px] flex items-center p-2 gap-2 border rounded-lg shadow-lg"
       >
-        <span>{translation('Version')}</span>
+        <span>{translation.Version}</span>
         <CaretDownIco size={18} />
         <span>{version === lang || !version ? 'v2' : version}</span>
       </button>

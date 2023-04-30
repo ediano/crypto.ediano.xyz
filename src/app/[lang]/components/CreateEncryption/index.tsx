@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import classnames from 'classnames';
 import { z } from 'zod';
 
-import { getDictionary } from '@/dictionaries';
+import { DictionaryKey, getDictionary } from '@/dictionaries';
 import { Input } from '@/components/Input';
 import { Textarea } from '@/components/Textarea';
 import { Locale } from '@/config/i18n.config';
@@ -91,31 +91,33 @@ export function CreateEncryption({ lang }: Props) {
             lang={lang}
             type="password"
             maxLength={100}
-            label={`${translation('Password')}: (${translation('Optional')}, Max 32)`}
-            error={translation(errors.password?.message as any)}
+            label={`${translation.Password}: (${translation.Optional}, Max 32)`}
+            error={translation[errors.password?.message as DictionaryKey]}
             {...register('password', { maxLength: 100 })}
           />
 
           <Textarea
             lang={lang}
-            label={`${translation('Text to encryption')}: (Max 10000)`}
-            error={translation(errors.textToEncryption?.message as any)}
+            label={`${translation['Text to encryption']}: (Max 10000)`}
+            error={translation[errors.textToEncryption?.message as DictionaryKey]}
             {...register('textToEncryption', { required: true })}
           />
 
           <ButtonUseClient type="submit" color="success">
-            {translation('Encrypt')}
+            {translation.Encrypt}
           </ButtonUseClient>
         </form>
       )}
 
       {(!!error || !!encryptedKey) && (
         <div className="flex flex-col gap-8 w-full max-w-lg mx-auto break-words">
-          {!!error && <span className="w-full bg-red-300 text-black rounded p-4">{translation(error as any)}</span>}
+          {!!error && (
+            <span className="w-full bg-red-300 text-black rounded p-4">{translation[error as DictionaryKey]}</span>
+          )}
 
           {!!encryptedKey && (
             <div className="w-full flex flex-col gap-4">
-              <div>{translation('Your key!')}:</div>
+              <div>{translation['Your key!']}:</div>
 
               <div className="w-full bg-green-600 text-white rounded p-4 flex flex-col gap-4">
                 <div className="w-full font-bold border-b border-white border-opacity-50 pb-4">{encryptedKey}</div>
@@ -127,11 +129,11 @@ export function CreateEncryption({ lang }: Props) {
                     color="white"
                     className={classnames(copiedText && 'text-green-600')}
                   >
-                    {translation('Copy')} <Copy size={22} className={classnames(copiedText && 'animate-bounce')} />
+                    {translation.Copy} <Copy size={22} className={classnames(copiedText && 'animate-bounce')} />
                   </ButtonUseClient>
 
                   <ButtonUseClient type="button" onClick={handleNewEncryptedKeyClick} color="white">
-                    {translation('New')}
+                    {translation.New}
                   </ButtonUseClient>
                 </div>
               </div>

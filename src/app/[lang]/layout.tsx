@@ -27,19 +27,21 @@ export async function generateMetadata({ params }: GenerateMetadata): Promise<Me
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URI!),
     title: {
-      default: translation('title'),
-      template: `%s | ${translation('title')}`,
+      default: translation.title,
+      template: `%s | ${translation.title}`,
     },
     openGraph: {
       title: {
-        default: translation('title'),
-        template: `%s | ${translation('title')}`,
+        default: translation.title,
+        template: `%s | ${translation.title}`,
       },
     },
   };
 }
 
 export default function RootLayout({ params, children }: Props) {
+  const translation = getDictionary(params.lang);
+
   return (
     <html lang={params.lang} className={inter.className}>
       <body>
@@ -47,6 +49,16 @@ export default function RootLayout({ params, children }: Props) {
         <Header lang={params.lang} />
 
         {children}
+
+        <div className="w-full max-w-7xl mx-auto mb-12">
+          {translation.site.details.map((detail, index) => {
+            return (
+              <div key={index + '-' + Date.now()} className="mb-4 text-lg">
+                {detail}
+              </div>
+            );
+          })}
+        </div>
       </body>
     </html>
   );

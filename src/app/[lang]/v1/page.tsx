@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: GenerateMetadata): Promise<Me
     },
     openGraph: {
       title: 'V1',
-      description: translation('description'),
+      description: translation.description,
       url: params.lang + '/v1',
     },
   };
