@@ -17,7 +17,7 @@ export async function Navbar({ lang }: Props) {
     <nav className="bg-gray-900 border-gray-700 p-4">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <Link href="/" locale={lang} className="flex items-center gap-2">
-          <span className="text-2xl font-semibold whitespace-nowrap text-white"> {translation('title')}</span>
+          <span className="text-2xl font-semibold whitespace-nowrap text-white"> {translation!.title}</span>
         </Link>
 
         <ul className="flex flex-row gap-6 items-center text-sm font-medium">

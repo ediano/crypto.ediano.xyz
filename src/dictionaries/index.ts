@@ -8,22 +8,10 @@ const dictionaries = {
   'pt-BR': ptBR,
 };
 
-export const getDictionary = (locale: Locale) => {
+export type Dictionary = typeof enUS;
+export type DictionaryKey = keyof Omit<Dictionary, 'site'>;
+
+export const getDictionary = (locale: Locale): Dictionary => {
   const dictionary = dictionaries[locale || 'en-US'];
-
-  return (key: keyof typeof enUS, params?: { [key: string]: string | number }) => {
-    let translation = dictionary[key];
-
-    if (!translation) return key;
-
-    if (params && Object.entries(params).length) {
-      Object.entries(params).forEach(([key, value]) => {
-        translation = translation.replace(`{{ ${key} }}`, String(value));
-      });
-    }
-
-    return translation;
-  };
+  return dictionary;
 };
-
-export type DictionaryUseClient = typeof enUS;

@@ -26,4 +26,14 @@ export default {
   Version: 'Versão',
   Default: 'Padrão',
   'Your key!': 'Sua chave!',
+  site: {
+    details: [
+      'O Crypto é um projeto de código aberto que tem como objetivo oferecer uma coleção de ferramentas de criptografia e descriptografia de texto. Ele foi desenvolvido em Node.js e utiliza a biblioteca de framework Next.js para construir a interface web, enquanto a tecnologia Vercel é utilizada para hospedar o projeto.',
+      'O projeto é distribuído sob a licença MIT, o que significa que ele pode ser utilizado, modificado e distribuído livremente.',
+      'Entre as ferramentas oferecidas pelo Crypto, destacam-se a criptografia de texto com algoritmos como AES, além da possibilidade de descriptografar textos criptografados com esses algoritmos.',
+      'O projeto é e pode ser desenvolvido de forma colaborativa, com contribuições de diversos desenvolvedores da comunidade. O desenvolvimento é feito em um repositório público no GitHub, permitindo que os desenvolvedores interessados possam contribuir com código, relatar problemas e sugerir melhorias.',
+      'A interface web do Crypto é construída com Next.js, um framework React que oferece recursos avançados para construção de aplicações web escaláveis e performáticas. A integração com a tecnologia Vercel permite hospedar o projeto em uma plataforma de hospedagem moderna e escalável, com recursos de cache e distribuição de conteúdo para garantir uma experiência de usuário rápida e confiável.',
+      'O uso de tecnologias modernas como Node.js, Next.js e Vercel garante a escalabilidade, performance e confiabilidade do projeto, permitindo que ele possa ser utilizado em aplicações críticas e de alto desempenho.',
+    ],
+  },
 };
