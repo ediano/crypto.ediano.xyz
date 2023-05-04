@@ -5,7 +5,7 @@ const STRING_ENCRYPTION_SECRET_KEY = process.env.STRING_ENCRYPTION_SECRET_KEY ||
 const config = {
   secretKey: STRING_ENCRYPTION_SECRET_KEY.split('-').join(''),
   algorithm: 'aes-256-cbc',
-  splitCode: '.',
+  splitCode: '|',
 };
 
 export class CryptographicV1 {
