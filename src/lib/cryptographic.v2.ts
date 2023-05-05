@@ -27,9 +27,16 @@ export class CryptographicV2 {
     return Buffer.from(value, 'hex');
   }
 
+  private newBufferFrom(key: string) {
+    return Buffer.from(key);
+  }
+
   encrypt({ value, key }: Encrypt) {
     const iv = Buffer.from(crypto.randomBytes(this.randomBytes));
-    const cipher = crypto.createCipheriv(config.algorithm, key || this.key, iv);
+
+    const newKey = !!key ? this.newBufferFrom(key) : this.key;
+
+    const cipher = crypto.createCipheriv(config.algorithm, newKey, iv);
     const encrypted = cipher.update(value.trim());
 
     const result = Buffer.concat([encrypted, cipher.final()]);
@@ -41,7 +48,9 @@ export class CryptographicV2 {
     const ivBuffer = this.getBufferHex(iv);
     const encryptedBuffer = this.getBufferHex(encrypted);
 
-    const decipher = crypto.createDecipheriv(config.algorithm, key || this.key, ivBuffer);
+    const newKey = !!key ? this.newBufferFrom(key) : this.key;
+
+    const decipher = crypto.createDecipheriv(config.algorithm, newKey, ivBuffer);
     const decrypted = decipher.update(encryptedBuffer);
 
     const result = Buffer.concat([decrypted, decipher.final()]);
